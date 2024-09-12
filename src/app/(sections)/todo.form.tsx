@@ -16,7 +16,7 @@ export const TodoForm = () => {
 
   const onSubmit = async (values: TodoSchema) => {
     try {
-      await addTodo()
+      await addTodo(values)
       toast.success("TODO guardado correctamente")
       form.reset()
     } catch (error) {
@@ -25,6 +25,10 @@ export const TodoForm = () => {
   }
 
   return (
-    <div>This is my form component</div>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <Input {...form.register('title')} placeholder="Título" />
+      <Input {...form.register('description')} placeholder="Descripción" />
+      <Button type="submit">Guardar TODO</Button>
+    </form>
   )
 }

@@ -1,6 +1,15 @@
 "use server"
+import fs from 'fs'
+import path from 'path'
 
-// TODO: Implement getTodos
+const todosFilePath = path.resolve('src/data/todos.json')
 
-export const getTodos = async () => {
+export async function getTodos() {
+  try {
+    const todos = JSON.parse(fs.readFileSync(todosFilePath, 'utf-8'))
+    return todos
+  } catch (error) {
+    console.error('Error al obtener los TODOs:', error)
+    return []
+  }
 }
